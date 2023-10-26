@@ -20,7 +20,7 @@ export default function Header() {
     <header className="flex flex-row justify-between items-center">
       <div className="flex flex-col gap-4 items-center md:flex-row">
         <Image src="/images/logo.png" width={200} height={200} alt="logo" />
-        <ul className="flex flex-row gap-4 items-center pt-2 ml-8 text-blue-500">
+        <ul className="flex flex-row gap-8 items-center mt-4 ml-8 text-blue-500">
           <li className={clsx(currentRoute === "/pokemon" && "font-bold")}>
             <Link href="/pokemon">All</Link>
           </li>
@@ -30,6 +30,13 @@ export default function Header() {
             )}
           >
             <Link href="/pokemon/favourite">Favourite</Link>
+          </li>
+          <li
+            className={clsx(
+              currentRoute === "/pokemon/search" && "font-bold"
+            )}
+          >
+            <Link href="/pokemon/search">Search</Link>
           </li>
         </ul>
       </div>
