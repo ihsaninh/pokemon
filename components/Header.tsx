@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Search, Sun } from "lucide-react";
+import { Sun } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,11 +10,11 @@ import { useTheme } from "next-themes";
 
 export default function Header() {
   const currentRoute = usePathname();
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   const onClickTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <header className="flex flex-row justify-between items-center">
@@ -33,8 +33,8 @@ export default function Header() {
           </li>
         </ul>
       </div>
-      <div className="flex flex-row gap-4 items-center cursor-pointer">
-        <Sun className="text-blue-500" size={24} onClick={onClickTheme}/>
+      <div className="flex flex-row gap-6 items-center cursor-pointer">
+        <Sun className="text-blue-500" size={24} onClick={onClickTheme} />
         <Avatar>
           <AvatarImage src="https://github.com/ihsaninh.png" />
           <AvatarFallback>IN</AvatarFallback>

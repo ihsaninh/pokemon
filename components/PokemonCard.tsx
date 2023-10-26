@@ -18,7 +18,7 @@ import { useToast } from "@/components/ui/use-toast";
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   const isPokemonExist = useSelector((state: ReduxState) =>
     selectIsPokemonExist(pokemon.id)(state)
@@ -28,13 +28,11 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
     dispatch(pokemonSlice.actions.addPokemon(pokemon));
     toast({
       description: `Congratuations! Pokemon ${pokemon.name} added to your favourite list`,
-    })
+    });
   };
 
   return (
-    <div
-      className="rounded-lg overflow-hidden border-blue-500 border-2"
-    >
+    <div className="rounded-lg overflow-hidden border-blue-500 border-2">
       <div className="flex flex-col justify-between p-4">
         <Image
           src={pokemon.sprites.other["official-artwork"].front_default}
@@ -45,17 +43,21 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
         />
         <div className="flex flex-row mt-4 justify-between items-center">
           <div className="flex flex-col gap-1">
-            <h4 className="text-2xl capitalize font-semibold cursor-pointer" onClick={() => router.push(`/pokemon/${pokemon.name}`)}>
+            <h4
+              className="text-2xl capitalize font-semibold cursor-pointer"
+              onClick={() => router.push(`/pokemon/${pokemon.name}`)}
+            >
               {pokemon.name}
             </h4>
             <p className="text-sm">#{generateValue(pokemon.order)}</p>
           </div>
           {isPokemonExist ? (
-            <BookmarkCheck
-              className="text-blue-500"
-            />
+            <BookmarkCheck className="text-blue-500" />
           ) : (
-            <Bookmark className="text-blue-500 cursor-pointer" onClick={onAddToFavourite} />
+            <Bookmark
+              className="text-blue-500 cursor-pointer"
+              onClick={onAddToFavourite}
+            />
           )}
         </div>
       </div>
@@ -64,6 +66,7 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
           <Badge
             key={index}
             style={{ backgroundColor: getPokemonColor(item.type.name) }}
+            className="capitalize"
           >
             {item.type.name}
           </Badge>

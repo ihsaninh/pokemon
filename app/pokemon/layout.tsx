@@ -6,7 +6,6 @@ export default function PokemonLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
   return (
     <div className="container max-w-5xl mx-auto p-10">
       <Header />

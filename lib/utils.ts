@@ -53,7 +53,6 @@ export const generateValue = (num: number): string => {
 };
 
 export function getOffset(urlString: string): string | null {
-  console.log(urlString)
   const url = new URL(urlString);
   const params = new URLSearchParams(url.search);
   const offset = params.get('offset');

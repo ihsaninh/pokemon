@@ -1,22 +1,8 @@
 import type { Metadata } from "next";
-import { Poppins, Miltonian_Tattoo } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/lib/providers";
-import { ThemeProvider } from "@/lib/theme-provider"
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-poppins",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
-
-export const miltonian = Miltonian_Tattoo({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-miltonian",
-  weight: ["400"],
-});
+import { ThemeProvider } from "@/lib/theme-provider";
+import { poppins } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: "Pokemon App",

@@ -15,3 +15,11 @@ export async function getPokemon(offset: string | number) {
   const allObjects = { next: data.next, previous: data.previous, data: pokemonData };
   return allObjects;
 }
+
+export async function getPokemonSearch(name: string) {
+  const res = await fetch(`${BASE_URL}/${name.toLowerCase()}`);
+  console.log(res)
+  const data = await res.json();
+
+  return data;
+}
