@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 import Link from "next/link";
 
 export default function Header({
@@ -15,7 +16,7 @@ export default function Header({
         <h1 className="text-5xl font-semibold">{title}</h1>
         <h1 className="text-md font-light text-gray-500 pt-2">{description}</h1>
       </div>
-      {showSearchIcon && <Link href="/search" className="relative p-2 shadow-sm rounded-full">
+      {showSearchIcon && <Link href="/pokemon/search" className="relative p-2 shadow-sm rounded-full">
         <svg
           className="w-5 h-5 text-gray-500 dark:text-gray-400"
           aria-hidden="true"
@@ -32,6 +33,9 @@ export default function Header({
           />
         </svg>
       </Link>}
+      <Link href="/pokemon/favourite" className="relative p-2 shadow-sm rounded-full">
+        <Star size={24} className="text-gray-400" />
+      </Link>
     </div>
   );
 }

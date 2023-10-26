@@ -1,6 +1,6 @@
 'use client'
 
-import { Pokemon } from "@/utils/type";
+import { Pokemon } from "@/lib/type";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -8,7 +8,7 @@ export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   const router = useRouter()
   
   return (
-    <div className="max-w-sm rounded-lg overflow-hidden shadow cursor-pointer" onClick={() => router.push(`/${pokemon.name}`)}>
+    <div className="max-w-sm rounded-lg overflow-hidden shadow cursor-pointer" onClick={() => router.push(`/pokemon/${pokemon.name}`)}>
       <div className="flex flex-row justify-between items-center">
         <div className="px-6 py-4">
           <h4>#{pokemon.order}</h4>

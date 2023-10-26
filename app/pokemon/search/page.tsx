@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Header from "../_components/Header";
+import Header from "@/components/Header";
 import useSWR from "swr";
-import PokemonCard from "../_components/PokemonCard";
-import { Pokemon } from "@/utils/type";
+import PokemonCard from "@/components/PokemonCard";
+import { Pokemon } from "@/lib/type";
 
 async function fetcher<JSON = any>(
   input: RequestInfo,

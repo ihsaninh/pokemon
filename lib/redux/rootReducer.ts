@@ -1,5 +1,5 @@
-import { counterSlice } from './slices'
+import { pokemonSlice } from './slices'
 
 export const reducer = {
-  counter: counterSlice.reducer,
+  pokemon: pokemonSlice.reducer,
 }
