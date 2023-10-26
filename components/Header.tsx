@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Sun } from "lucide-react";
+import { MoonStar, Sun } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,16 +32,22 @@ export default function Header() {
             <Link href="/pokemon/favourite">Favourite</Link>
           </li>
           <li
-            className={clsx(
-              currentRoute === "/pokemon/search" && "font-bold"
-            )}
+            className={clsx(currentRoute === "/pokemon/search" && "font-bold")}
           >
             <Link href="/pokemon/search">Search</Link>
           </li>
         </ul>
       </div>
       <div className="flex flex-row gap-6 items-center cursor-pointer">
-        <Sun className="text-blue-500" size={24} onClick={onClickTheme} />
+        {theme === "dark" ? (
+          <MoonStar
+            className="text-blue-500"
+            size={24}
+            onClick={onClickTheme}
+          />
+        ) : (
+          <Sun className="text-blue-500" size={24} onClick={onClickTheme} />
+        )}
         <Avatar>
           <AvatarImage src="https://github.com/ihsaninh.png" />
           <AvatarFallback>IN</AvatarFallback>
