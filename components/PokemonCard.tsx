@@ -1,33 +1,72 @@
-'use client'
+"use client";
 
 import { Pokemon } from "@/lib/type";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+import { generateValue, getPokemonColor } from "@/lib/utils";
+import { Bookmark, BookmarkCheck } from "lucide-react";
+import {
+  ReduxState,
+  pokemonSlice,
+  selectIsPokemonExist,
+  useDispatch,
+  useSelector,
+} from "@/lib/redux";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
-  const router = useRouter()
-  
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { toast } = useToast()
+
+  const isPokemonExist = useSelector((state: ReduxState) =>
+    selectIsPokemonExist(pokemon.id)(state)
+  );
+
+  const onAddToFavourite = () => {
+    dispatch(pokemonSlice.actions.addPokemon(pokemon));
+    toast({
+      description: `Congratuations! Pokemon ${pokemon.name} added to your favourite list`,
+    })
+  };
+
   return (
-    <div className="max-w-sm rounded-lg overflow-hidden shadow cursor-pointer" onClick={() => router.push(`/pokemon/${pokemon.name}`)}>
-      <div className="flex flex-row justify-between items-center">
-        <div className="px-6 py-4">
-          <h4>#{pokemon.order}</h4>
-          <p className="text-gray-700 text-3xl font-medium">
-            {pokemon.name}
-          </p>
-        </div>
+    <div
+      className="rounded-lg overflow-hidden border-blue-500 border-2"
+    >
+      <div className="flex flex-col justify-between p-4">
         <Image
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+          src={pokemon.sprites.other["official-artwork"].front_default}
           alt="pokemon-image"
-          width={100}
-          height={100}
+          width={180}
+          height={180}
+          className="self-center"
         />
-      </div>
-      <div className="flex gap-2 flex-row px-6  py-4">
-        {pokemon.types.map((item, index) => (
-          <div className="py-1 px-2 rounded border" key={index}>
-            <p>{item.type.name}</p>
+        <div className="flex flex-row mt-4 justify-between items-center">
+          <div className="flex flex-col gap-1">
+            <h4 className="text-2xl capitalize font-semibold cursor-pointer" onClick={() => router.push(`/pokemon/${pokemon.name}`)}>
+              {pokemon.name}
+            </h4>
+            <p className="text-sm">#{generateValue(pokemon.order)}</p>
           </div>
+          {isPokemonExist ? (
+            <BookmarkCheck
+              className="text-blue-500"
+            />
+          ) : (
+            <Bookmark className="text-blue-500 cursor-pointer" onClick={onAddToFavourite} />
+          )}
+        </div>
+      </div>
+      <div className="flex gap-2 flex-row px-4 py-4">
+        {pokemon.types.map((item, index) => (
+          <Badge
+            key={index}
+            style={{ backgroundColor: getPokemonColor(item.type.name) }}
+          >
+            {item.type.name}
+          </Badge>
         ))}
       </div>
     </div>

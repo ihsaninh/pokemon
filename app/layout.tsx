@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, Miltonian_Tattoo } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/lib/providers";
+import { ThemeProvider } from "@/lib/theme-provider"
 
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-poppins",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+export const miltonian = Miltonian_Tattoo({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-miltonian",
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Providers>{children}</Providers>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Providers>{children}</Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

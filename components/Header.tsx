@@ -1,41 +1,45 @@
-import { Star } from "lucide-react";
-import Link from "next/link";
+"use client";
 
-export default function Header({
-  title,
-  description,
-  showSearchIcon = false,
-}: {
-  title: string;
-  description: string;
-  showSearchIcon?: boolean;
-}) {
+import Image from "next/image";
+import { Search, Sun } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import { useTheme } from "next-themes";
+
+export default function Header() {
+  const currentRoute = usePathname();
+  const { theme, setTheme } = useTheme()
+
+  const onClickTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark")
+  }
+
   return (
-    <div className="flex flex-row justify-between items-center">
-      <div className="flex flex-col flex-1">
-        <h1 className="text-5xl font-semibold">{title}</h1>
-        <h1 className="text-md font-light text-gray-500 pt-2">{description}</h1>
+    <header className="flex flex-row justify-between items-center">
+      <div className="flex flex-col gap-4 items-center md:flex-row">
+        <Image src="/images/logo.png" width={200} height={200} alt="logo" />
+        <ul className="flex flex-row gap-4 items-center pt-2 ml-8 text-blue-500">
+          <li className={clsx(currentRoute === "/pokemon" && "font-bold")}>
+            <Link href="/pokemon">All</Link>
+          </li>
+          <li
+            className={clsx(
+              currentRoute === "/pokemon/favourite" && "font-bold"
+            )}
+          >
+            <Link href="/pokemon/favourite">Favourite</Link>
+          </li>
+        </ul>
       </div>
-      {showSearchIcon && <Link href="/pokemon/search" className="relative p-2 shadow-sm rounded-full">
-        <svg
-          className="w-5 h-5 text-gray-500 dark:text-gray-400"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 20 20"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-          />
-        </svg>
-      </Link>}
-      <Link href="/pokemon/favourite" className="relative p-2 shadow-sm rounded-full">
-        <Star size={24} className="text-gray-400" />
-      </Link>
-    </div>
+      <div className="flex flex-row gap-4 items-center cursor-pointer">
+        <Sun className="text-blue-500" size={24} onClick={onClickTheme}/>
+        <Avatar>
+          <AvatarImage src="https://github.com/ihsaninh.png" />
+          <AvatarFallback>IN</AvatarFallback>
+        </Avatar>
+      </div>
+    </header>
   );
 }
